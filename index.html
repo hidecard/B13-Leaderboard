@@ -12,18 +12,19 @@
             --primary-orange: #ff6200;
             --light-orange: #ff8c00;
             --gold: #ffd700;
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.25);
             --text-color: #ffffff;
             --text-secondary: #e0e0e0;
-            --shadow-color: rgba(0, 0, 0, 0.2);
+            --shadow-color: rgba(0, 0, 0, 0.3);
             --dark-bg: #2b1a0d;
             --darker-bg: #3b261b;
+            --ripple-color: rgba(255, 98, 0, 0.4);
         }
 
         body {
             background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
-            font-family: -apple-system, BlinkMacSystemFont, 'San Francisco', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
             color: var(--text-color);
             margin: 0;
             padding: 0;
@@ -39,28 +40,29 @@
             max-width: 95%;
             margin: clamp(20px, 4vw, 40px) auto;
             background: var(--glass-bg);
-            backdrop-filter: blur(12px) saturate(180%);
-            -webkit-backdrop-filter: blur(12px) saturate(180%);
-            border-radius: 20px;
+            backdrop-filter: blur(14px) saturate(200%);
+            -webkit-backdrop-filter: blur(14px) saturate(200%);
+            border-radius: 24px;
             padding: clamp(20px, 3vw, 30px);
             border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px var(--shadow-color);
+            box-shadow: 0 10px 40px var(--shadow-color);
+            transition: all 0.3s ease;
         }
 
         .light-mode .leaderboard {
-            background: rgba(255, 255, 255, 0.7);
-            border-color: rgba(0, 0, 0, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.75);
+            border-color: rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
         }
 
         h2 {
             text-align: center;
             color: var(--primary-orange);
-            font-size: clamp(1.5rem, 4vw, 2.8rem);
-            font-weight: 600;
-            letter-spacing: 0.5px;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 700;
+            letter-spacing: 0.4px;
             margin-bottom: clamp(20px, 3vw, 35px);
-            text-shadow: 0 0 8px rgba(255, 98, 0, 0.3);
+            text-shadow: 0 0 10px rgba(255, 98, 0, 0.4);
         }
 
         .light-mode h2 {
@@ -71,71 +73,93 @@
         .table {
             width: 100%;
             border-collapse: separate;
-            border-spacing: 0 8px;
+            border-spacing: 0 10px;
         }
 
         thead th {
             background: linear-gradient(90deg, var(--primary-orange), var(--light-orange));
             color: #fff;
-            padding: clamp(10px, 2vw, 14px);
+            padding: clamp(12px, 2vw, 16px);
             font-weight: 600;
-            font-size: clamp(0.8rem, 1.6vw, 1.1rem);
-            border-radius: 10px;
+            font-size: clamp(0.9rem, 1.6vw, 1.2rem);
+            border-radius: 12px;
             position: sticky;
             top: 0;
             z-index: 10;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+
+        thead th:hover {
+            transform: translateY(-1px);
         }
 
         tbody tr {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px) saturate(180%);
+            -webkit-backdrop-filter: blur(10px) saturate(180%);
+            border-radius: 14px;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
         .light-mode tbody tr {
-            background: rgba(0, 0, 0, 0.05);
+            background: rgba(255, 255, 255, 0.75);
         }
 
         tbody tr:hover {
-            background: rgba(255, 98, 0, 0.15);
+            background: rgba(255, 98, 0, 0.2);
             transform: translateY(-2px);
-            box-shadow: 0 4px 16px var(--shadow-color);
+            box-shadow: 0 6px 20px var(--shadow-color);
         }
 
         td {
-            padding: clamp(10px, 2vw, 15px);
+            padding: clamp(12px, 2vw, 16px);
             vertical-align: middle;
-            font-size: clamp(0.8rem, 1.6vw, 1rem);
+            font-size: clamp(0.9rem, 1.6vw, 1.1rem);
         }
 
         .rank-badge {
             background: linear-gradient(45deg, var(--primary-orange), var(--light-orange));
             color: #fff;
             border-radius: 50%;
-            width: clamp(30px, 4vw, 45px);
-            height: clamp(30px, 4vw, 45px);
+            width: clamp(32px, 4vw, 48px);
+            height: clamp(32px, 4vw, 48px);
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-weight: 600;
-            box-shadow: 0 2px 8px var(--shadow-color);
+            font-weight: 700;
+            box-shadow: 0 3px 10px var(--shadow-color);
             animation: pulse 2s ease-in-out infinite;
         }
 
         .name {
             color: var(--light-orange);
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.2s ease;
+        }
+
+        .name:hover {
+            color: var(--primary-orange);
         }
 
         .light-mode .name {
             color: #333333;
         }
 
+        .light-mode .name:hover {
+            color: var(--light-orange);
+        }
+
         .points {
             color: var(--gold);
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .averages {
@@ -150,13 +174,18 @@
 
         .badge {
             display: inline-block;
-            margin: 3px;
-            padding: 4px 8px;
-            border-radius: 14px;
-            font-size: 0.75rem;
+            margin: 4px;
+            padding: 5px 10px;
+            border-radius: 16px;
+            font-size: 0.8rem;
             font-weight: 600;
             color: #fff;
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(6px);
+            transition: transform 0.2s ease;
+        }
+
+        .badge:hover {
+            transform: scale(1.05);
         }
 
         .badge-gold { background: linear-gradient(45deg, #ffd700, #ffaa00); }
@@ -165,19 +194,19 @@
         .badge-blue { background: linear-gradient(45deg, #3498db, #2980b9); }
 
         .progress {
-            height: clamp(14px, 1.8vw, 18px);
-            background: rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
+            height: clamp(16px, 1.8vw, 20px);
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
             width: 100%;
-            max-width: 220px;
+            max-width: 240px;
             margin: 0 auto;
             overflow: hidden;
         }
 
         .progress-bar {
             background: linear-gradient(90deg, var(--primary-orange), var(--light-orange));
-            border-radius: 10px;
-            font-size: clamp(0.65rem, 1.2vw, 0.85rem);
+            border-radius: 12px;
+            font-size: clamp(0.7rem, 1.2vw, 0.9rem);
             transition: width 0.5s ease-in-out;
         }
 
@@ -186,50 +215,55 @@
             flex-direction: row;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 14px;
         }
 
         .btn-orange {
             background: linear-gradient(90deg, var(--primary-orange), var(--light-orange));
             color: #fff;
             border: none;
-            border-radius: 12px;
-            padding: clamp(8px, 1.5vw, 12px);
+            border-radius: 14px;
+            padding: clamp(10px, 1.5vw, 14px);
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            font-weight: 600;
         }
 
         .btn-orange:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px var(--shadow-color);
-            filter: brightness(1.1);
+            box-shadow: 0 6px 16px var(--shadow-color);
+            filter: brightness(1.15);
         }
 
         .btn-orange.active {
             background: linear-gradient(90deg, var(--light-orange), var(--primary-orange));
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.25);
         }
 
         .search-box .input-group-text {
             background: var(--glass-bg);
             color: var(--text-color);
             border: 1px solid var(--glass-border);
-            border-radius: 10px 0 0 10px;
-            backdrop-filter: blur(8px);
+            border-radius: 12px 0 0 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
 
         .search-box .form-control {
             background: var(--glass-bg);
             color: var(--text-color);
             border: 1px solid var(--glass-border);
-            border-radius: 0 10px 10px 0;
-            backdrop-filter: blur(8px);
+            border-radius: 0 12px 12px 0;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
 
         .light-mode .search-box .input-group-text,
         .light-mode .search-box .form-control {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.75);
             color: #333333;
-            border-color: rgba(0, 0, 0, 0.1);
+            border-color: rgba(0, 0, 0, 0.15);
         }
 
         .table-responsive {
@@ -239,16 +273,16 @@
         }
 
         .table-responsive::-webkit-scrollbar {
-            width: 10px;
+            width: 12px;
         }
 
         .table-responsive::-webkit-scrollbar-thumb {
             background: var(--primary-orange);
-            border-radius: 5px;
+            border-radius: 6px;
         }
 
         .table-responsive::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .light-mode .table-responsive::-webkit-scrollbar-thumb {
@@ -256,30 +290,31 @@
         }
 
         .light-mode .table-responsive::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.05);
+            background: rgba(0, 0, 0, 0.1);
         }
 
         /* Modal Chart Fixes */
         #points-history {
-            height: 340px;
-            padding-bottom: 10px;
+            height: 360px;
+            padding-bottom: 12px;
         }
 
         #pointsChart {
             width: 100% !important;
-            height: 300px !important;
+            height: 320px !important;
         }
 
         .modal-content {
             background: var(--glass-bg);
-            backdrop-filter: blur(12px) saturate(180%);
+            backdrop-filter: blur(14px) saturate(200%);
             border: 1px solid var(--glass-border);
-            border-radius: 20px;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px var(--shadow-color);
         }
 
         .light-mode .modal-content {
-            background: rgba(255, 255, 255, 0.7);
-            border-color: rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.75);
+            border-color: rgba(0, 0, 0, 0.15);
         }
 
         .modal-header, .modal-footer {
@@ -288,6 +323,7 @@
 
         .modal-title {
             color: var(--primary-orange);
+            font-weight: 700;
         }
 
         .light-mode .modal-title {
@@ -295,11 +331,40 @@
         }
 
         .modal-body {
-            padding: 20px;
+            padding: 24px;
         }
 
         .modal-dialog {
-            max-width: 800px;
+            max-width: 850px;
+        }
+
+        /* Ripple Effect */
+        .ripple {
+            position: relative;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        .ripple::after {
+            content: '';
+            position: absolute;
+            background: var(--ripple-color);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: scale(0);
+            opacity: 0.6;
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+        }
+
+        .ripple:active::after {
+            transform: scale(2);
+            opacity: 0;
+        }
+
+        /* Apply ripple effect to interactive elements */
+        .btn-orange, .name, thead th, tbody tr, .btn-close {
+            position: relative;
+            overflow: hidden;
         }
 
         @media (min-width: 769px) {
@@ -322,7 +387,7 @@
 
             .d-flex {
                 flex-direction: column;
-                gap: 12px;
+                gap: 14px;
                 align-items: stretch;
             }
 
@@ -330,13 +395,13 @@
                 width: 100%;
                 display: flex;
                 justify-content: space-between;
-                gap: 8px;
+                gap: 10px;
             }
 
             .btn {
                 flex: 1;
-                padding: clamp(6px, 1.2vw, 12px);
-                font-size: clamp(0.8rem, 1.6vw, 1rem);
+                padding: clamp(8px, 1.2vw, 14px);
+                font-size: clamp(0.9rem, 1.6vw, 1.1rem);
             }
 
             .progress {
@@ -344,11 +409,11 @@
             }
 
             #points-history {
-                height: 300px;
+                height: 320px;
             }
 
             #pointsChart {
-                height: 260px !important;
+                height: 280px !important;
             }
         }
 
@@ -368,15 +433,16 @@
             }
 
             tr {
-                margin-bottom: 16px;
-                padding: 12px;
-                background: rgba(255, 255, 255, 0.1);
-                border-radius: 12px;
+                margin-bottom: 18px;
+                padding: 14px;
+                background: var(--glass-bg);
+                backdrop-filter: blur(10px) saturate(180%);
+                border-radius: 14px;
                 animation: fadeIn 0.5s ease forwards;
             }
 
             td {
-                padding: 10px;
+                padding: 12px;
                 position: relative;
                 border-bottom: 1px solid var(--glass-border);
             }
@@ -385,7 +451,7 @@
                 content: attr(data-label);
                 font-weight: 600;
                 display: block;
-                margin-bottom: 6px;
+                margin-bottom: 8px;
                 color: var(--light-orange);
             }
 
@@ -412,8 +478,8 @@
         }
 
         @keyframes pulse {
-            0% { box-shadow: 0 0 5px var(--shadow-color); }
-            100% { box-shadow: 0 0 12px var(--shadow-color); }
+            0% { box-shadow: 0 0 6px var(--shadow-color); }
+            100% { box-shadow: 0 0 14px var(--shadow-color); }
         }
 
         @keyframes fadeIn {
@@ -421,27 +487,27 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600;700&display=swap');
     </style>
 </head>
 <body>
 <div class="leaderboard">
-    <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="mb-0"><i class="fa-solid fa-terminal"></i> YHA Coder Leaderboard</h2>
         <div class="btn-group">
-            <button id="theme-toggle" class="btn btn-sm btn-orange" title="Toggle theme">
+            <button id="theme-toggle" class="btn btn-sm btn-orange ripple" title="Toggle theme">
                 <i class="fas fa-moon"></i>
             </button>
-            <button id="refresh-btn" class="btn btn-sm btn-orange" title="Refresh data">
+            <button id="refresh-btn" class="btn btn-sm btn-orange ripple" title="Refresh data">
                 <i class="fas fa-sync-alt"></i>
             </button>
-            <button id="export-btn" class="btn btn-sm btn-success" title="Export to CSV">
+            <button id="export-btn" class="btn btn-sm btn-success ripple" title="Export to CSV">
                 <i class="fas fa-file-export"></i>
             </button>
         </div>
     </div>
 
-    <div class="search-box mb-3">
+    <div class="search-box mb-4">
         <div class="input-group">
             <span class="input-group-text">
                 <i class="fas fa-search"></i>
@@ -455,11 +521,11 @@
         <table class="table text-center">
             <thead>
                 <tr>
-                    <th data-sort="rank">Rank <i class="fas fa-sort"></i></th>
-                    <th data-sort="name">Name <i class="fas fa-sort"></i></th>
-                    <th data-sort="points">Points <i class="fas fa-sort"></i></th>
-                    <th data-sort="averages">Averages <i class="fas fa-sort"></i></th>
-                    <th data-sort="achievements">Achievements <i class="fas fa-sort"></i></th>
+                    <th data-sort="rank" class="ripple">Rank <i class="fas fa-sort"></i></th>
+                    <th data-sort="name" class="ripple">Name <i class="fas fa-sort"></i></th>
+                    <th data-sort="points" class="ripple">Points <i class="fas fa-sort"></i></th>
+                    <th data-sort="averages" class="ripple">Averages <i class="fas fa-sort"></i></th>
+                    <th data-sort="achievements" class="ripple">Achievements <i class="fas fa-sort"></i></th>
                 </tr>
             </thead>
             <tbody id="leaderboard-body">
@@ -479,7 +545,7 @@
         <div class="modal-content">
             <div class="modal-header border-orange">
                 <h5 class="modal-title" id="userModalTitle">User Profile</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-close-white ripple" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div id="user-details" class="text-center">
@@ -489,18 +555,18 @@
                 </div>
                 <!-- Points History Section -->
                 <div id="points-history" class="mt-4">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
                         <h5 class="text-orange" id="chart-title">Daily Points Change</h5>
                         <div class="btn-group">
-                            <button id="daily-btn" class="btn btn-sm btn-orange active" onclick="toggleChartView('daily')">Daily</button>
-                            <button id="weekly-btn" class="btn btn-sm btn-orange" onclick="toggleChartView('weekly')">Weekly</button>
+                            <button id="daily-btn" class="btn btn-sm btn-orange active ripple" onclick="toggleChartView('daily')">Daily</button>
+                            <button id="weekly-btn" class="btn btn-sm btn-orange ripple" onclick="toggleChartView('weekly')">Weekly</button>
                         </div>
                     </div>
                     <canvas id="pointsChart"></canvas>
                 </div>
             </div>
             <div class="modal-footer border-orange">
-                <button type="button" class="btn btn-orange" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-orange ripple" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -542,6 +608,34 @@
         document.getElementById('leaderboard-body').addEventListener('click', function(e) {
             if (e.target.classList.contains('name')) showUserModal(e.target.textContent);
         });
+
+        // Add ripple effect
+        document.querySelectorAll('.ripple').forEach(element => {
+            element.addEventListener('click', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const size = Math.max(rect.width, rect.height);
+                const ripple = document.createElement('span');
+                ripple.style.left = `${x}px`;
+                ripple.style.top = `${y}px`;
+                ripple.style.position = 'absolute';
+                ripple.style.background = 'var(--ripple-color)';
+                ripple.style.borderRadius = '50%';
+                ripple.style.width = `${size}px`;
+                ripple.style.height = `${size}px`;
+                ripple.style.transform = 'scale(0)';
+                ripple.style.opacity = '0.6';
+                ripple.style.transition = 'transform 0.5s ease-out, opacity 0.5s ease-out';
+                ripple.style.pointerEvents = 'none';
+                this.appendChild(ripple);
+                setTimeout(() => {
+                    ripple.style.transform = 'scale(2)';
+                    ripple.style.opacity = '0';
+                }, 0);
+                setTimeout(() => ripple.remove(), 500);
+            });
+        });
     }
 
     function toggleTheme() {
@@ -570,7 +664,7 @@
         } catch (error) {
             document.getElementById('leaderboard-body').innerHTML = `
                 <tr><td colspan="5" class="text-center text-danger">
-                    Failed to load data. <button class="btn btn-sm btn-orange mt-2" onclick="fetchLeaderboard()">
+                    Failed to load data. <button class="btn btn-sm btn-orange mt-2 ripple" onclick="fetchLeaderboard()">
                         <i class="fas fa-sync-alt"></i> Retry
                     </button>
                 </td></tr>`;
@@ -586,9 +680,9 @@
             const maxPoints = Math.max(...data.map(p => parseInt(p.points))) || 100;
             const pointsPercentage = (parseInt(player.points) / maxPoints) * 100;
             
-            html += `<tr style="animation-delay: ${animationDelay}">
+            html += `<tr style="animation-delay: ${animationDelay}" class="ripple">
                 <td data-label="Rank"><span class="rank-badge">${player.rank}</span></td>
-                <td data-label="Name"><span class="name">${player.name}</span></td>
+                <td data-label="Name"><span class="name ripple">${player.name}</span></td>
                 <td data-label="Points">
                     <div class="points-container">
                         <span class="points me-2">${player.points}</span>
@@ -655,27 +749,27 @@
         
         document.getElementById('userModalTitle').textContent = `${userName}'s Profile`;
         const userDetails = `
-            <div class="mb-3">
-                <div class="rank-badge mx-auto mb-2" style="width: 60px; height: 60px; font-size: 1.5rem;">${user.rank}</div>
+            <div class="mb-4">
+                <div class="rank-badge mx-auto mb-3" style="width: 64px; height: 64px; font-size: 1.6rem;">${user.rank}</div>
                 <h4 class="text-orange">${userName}</h4>
             </div>
             <div class="row text-start">
-                <div class="col-md-6 mb-2">
+                <div class="col-md-6 mb-3">
                     <strong><i class="fas fa-star me-2"></i>Points:</strong> 
                     <span class="points">${user.points}</span>
                 </div>
-                <div class="col-md-6 mb-2">
+                <div class="col-md-6 mb-3">
                     <strong><i class="fas fa-percentage me-2"></i>Averages:</strong> 
                     <span class="averages">${user.averages}%</span>
                 </div>
-                <div class="col-md-6 mb-2">
+                <div class="col-md-6 mb-3">
                     <strong><i class="fas fa-trophy me-2"></i>Achievements:</strong>
-                    <div class="mt-1">${formatAchievements(user.achievements)}</div>
+                    <div class="mt-2">${formatAchievements(user.achievements)}</div>
                 </div>
             </div>
-            <div class="mt-3">
+            <div class="mt-4">
                 <h5 class="text-orange">Progress</h5>
-                <div class="progress mb-2" style="height: 25px;">
+                <div class="progress mb-3" style="height: 28px;">
                     <div class="progress-bar" style="width: ${(parseInt(user.points) / 100) * 100}%">${user.points}</div>
                 </div>
             </div>`;
@@ -712,11 +806,11 @@
 
         if (!history.length) {
             document.getElementById('points-history').innerHTML = `
-                <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="d-flex justify-content-between align-items-center mb-4">
                     <h5 class="text-orange" id="chart-title">Points History</h5>
                     <div class="btn-group">
-                        <button id="daily-btn" class="btn btn-sm btn-orange active" onclick="toggleChartView('daily')">Daily</button>
-                        <button id="weekly-btn" class="btn btn-sm btn-orange" onclick="toggleChartView('weekly')">Weekly</button>
+                        <button id="daily-btn" class="btn btn-sm btn-orange active ripple" onclick="toggleChartView('daily')">Daily</button>
+                        <button id="weekly-btn" class="btn btn-sm btn-orange ripple" onclick="toggleChartView('weekly')">Weekly</button>
                     </div>
                 </div>
                 <p>No history available.</p>`;
@@ -756,7 +850,8 @@
                     data: data,
                     backgroundColor: data.map(value => value >= 0 ? 'rgba(255, 98, 0, 0.6)' : 'rgba(255, 0, 0, 0.6)'),
                     borderColor: data.map(value => value >= 0 ? 'rgba(255, 98, 0, 1)' : 'rgba(255, 0, 0, 1)'),
-                    borderWidth: 1
+                    borderWidth: 1,
+                    borderRadius: 8
                 }]
             },
             options: {
@@ -767,28 +862,33 @@
                         title: {
                             display: true,
                             text: xTitle,
-                            color: '#fff'
+                            color: '#fff',
+                            font: { weight: '600' }
                         },
-                        ticks: { color: '#fff' },
-                        grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                        ticks: { color: '#fff', font: { size: 12 } },
+                        grid: { color: 'rgba(255, 255, 255, 0.15)' }
                     },
                     y: {
                         title: {
                             display: true,
                             text: yTitle,
-                            color: '#fff'
+                            color: '#fff',
+                            font: { weight: '600' }
                         },
-                        ticks: { color: '#fff' },
-                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        ticks: { color: '#fff', font: { size: 12 } },
+                        grid: { color: 'rgba(255, 255, 255, 0.15)' },
                         suggestedMin: Math.min(...data, 0) * 1.2,
                         suggestedMax: Math.max(...data, 0) * 1.2
                     }
                 },
                 plugins: {
                     legend: {
-                        labels: { color: '#fff' }
+                        labels: { color: '#fff', font: { size: 14 } }
                     },
                     tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        title: { titleFontSize: 14 },
+                        bodyFontSize: 12,
                         callbacks: {
                             label: function(context) {
                                 let label = context.dataset.label || '';
@@ -801,6 +901,9 @@
                             }
                         }
                     }
+                },
+                animation: {
+                    duration: 150
                 }
             }
         });
@@ -812,7 +915,7 @@
         const csvRows = [headers.join(',')];
         
         leaderboardData.forEach(user => {
-            csvRows.push([user.rank, `"${user.name}"`, user.points, `"${user.averages}%"`, `"${user.achievements || ''}"`].join(','));
+            csvRows.push([user.rank, `"${user.name}"`, user.points, `"${user.averages}"`, `"${user.achievements || ''}"`].join(','));
         });
         
         const blob = new Blob([csvRows.join('\n')], { type: 'text/csv;charset=utf-8;' });
